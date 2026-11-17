@@ -14,7 +14,10 @@ inline bool containsIgnoreCase(const char* text,const char* key){
 }
 inline Status classify(const char* message,Topic* topics,std::size_t n,std::size_t maxMessage=512){
  if(!message||!topics||!n||n>32||!maxMessage||maxMessage>4096)return InvalidInput;
- if(std::strlen(message)>maxMessage)return CapacityExceeded;
+ const std::size_t length=std::strlen(message);
+ if(!length)return InvalidInput;
+ if(length>maxMessage)return CapacityExceeded;
+ for(std::size_t i=0;i<length;++i){const unsigned char ch=(unsigned char)message[i];if(ch<32||ch==127)return InvalidInput;}
  for(std::size_t i=0;i<n;++i){
   if(!topics[i].name||!topics[i].keyword||!topics[i].keyword[0])return InvalidInput;
   if(std::strlen(topics[i].keyword)>64)return CapacityExceeded;
