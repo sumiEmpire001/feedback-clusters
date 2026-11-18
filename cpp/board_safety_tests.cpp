@@ -8,8 +8,8 @@ int main(){
  assert(t[0].count==1&&t[1].count==1);
  assert(classify("none",t,2,96)==Ok);
  assert(classify("",t,2,96)==InvalidInput);
- assert(classify("battery\\n",t,2,96)==InvalidInput);
- assert(classify("hot\\t",t,2,96)==InvalidInput);
+ assert(classify("battery\n",t,2,96)==InvalidInput);
+ assert(classify("hot\t",t,2,96)==InvalidInput);
  assert(t[0].count==1&&t[1].count==1);
  t[0].count=UINT_MAX;
  assert(classify("battery hot",t,2,96)==CapacityExceeded);
